@@ -17,16 +17,9 @@ public class AsignacionResponsableTecnicoRT {
 
 	private int fechaDesde;
 	private int fechaHasta;
-	public PersonalCientífico m_PersonalCientífico;
-	public RecursoTecnologico m_RecursoTecnologico;
+    private PersonalCientífico personalCientífico;
+    private RecursoTecnologico recursoTecnologico;
 
-	public AsignacionResponsableTecnicoRT(){
-
-	}
-
-	~AsignacionResponsableTecnicoRT(){
-
-	}
 
 	public void crear(){
 
