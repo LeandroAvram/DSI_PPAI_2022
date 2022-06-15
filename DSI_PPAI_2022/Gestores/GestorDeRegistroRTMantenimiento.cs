@@ -19,8 +19,13 @@ namespace DSI_PPAI_2022
 
 		public GestorDeRegistroRTMantenimiento() {
 			/**********************************************************DATA MOCK************************************************************************/
-			PersonalCientífico personalCientifico = new PersonalCientífico(69099, "leandro", "avram", 634678, "ldavram@teco.com.ar", "leoavram7@gmail.com", 351706475);
-			Usuario user = new Usuario("admin", "root", 0, personalCientifico);
+			PersonalCientífico personalCientifico1 = new PersonalCientífico(69099, "leandro", "avram", 634678, "ldavram@teco.com.ar", "leoavram7@gmail.com", 351706475);
+			PersonalCientífico personalCientifico2 = new PersonalCientífico(45664, "vivi", "sofi", 634678, "ldavram@teco.com.ar", "leoavram7@gmail.com", 351706475);
+			PersonalCientífico personalCientifico3 = new PersonalCientífico(78512, "Dante", "carlo", 634678, "ldavram@teco.com.ar", "leoavram7@gmail.com", 351706475);
+			RecursoTecnologico recursoTeconologico1 = new RecursoTecnologico();
+			var listaAsignaciones = new List<AsignacionResponsableTecnicoRT>();
+			listaAsignaciones.Add(new AsignacionResponsableTecnicoRT(DateTime.Parse("2009-05-05"), DateTime.Parse("2009-05-05"), personalCientifico1,));
+			Usuario user = new Usuario("admin", "root", 0, personalCientifico1);
 			Sesion sesion = new Sesion();
 			sesion.FechaInicio = DateTime.Parse("2009-05-05");
 			sesion.HoraInicio = TimeSpan.Parse("09:00:00");
@@ -47,6 +52,11 @@ namespace DSI_PPAI_2022
 		public PersonalCientífico ObtenerUsuarioLogueado() {
 			return this.sesion.GetPersonalCientificoEnSesion();
 		}
+
+		public AsignacionResponsableTecnicoRT esDeUsuarioLogeadoYVigente()
+        {
+
+        }
 
 		public void tomarSeleccionRT() {
 
