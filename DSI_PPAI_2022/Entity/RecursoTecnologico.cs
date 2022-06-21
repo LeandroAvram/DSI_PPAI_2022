@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-
-
+using DSI_PPAI_2022.Resource;
 
 public class RecursoTecnologico {
 
@@ -18,10 +17,10 @@ public class RecursoTecnologico {
     private CaracteristicaRecurso caracteristicaRecurso;
     private Mantenimiento mantenimiento;
     private HorarioRT horarioRT;
-    private CambioEstadoRT cambioEstadoRT;
+    private List<CambioEstadoRT> cambioEstadoRT;
     private Turno turno;
 
-    public RecursoTecnologico(int numeroRT, DateTime fechaAlta, string imagenes, int periodicidadMantenimientoPrev, int duracionMantenimientoPrev, int fraccionHorarioTurnos, Modelo modelo, TipoRecursoTecnologico tipoRecursoTecnologico, CaracteristicaRecurso caracteristicaRecurso, Mantenimiento mantenimiento, HorarioRT horarioRT, CambioEstadoRT cambioEstadoRT, Turno turno)
+    public RecursoTecnologico(int numeroRT, DateTime fechaAlta, string imagenes, int periodicidadMantenimientoPrev, int duracionMantenimientoPrev, int fraccionHorarioTurnos, Modelo modelo, TipoRecursoTecnologico tipoRecursoTecnologico, CaracteristicaRecurso caracteristicaRecurso, Mantenimiento mantenimiento, HorarioRT horarioRT, List<CambioEstadoRT> cambioEstadoRT, Turno turno)
     {
         this.numeroRT = numeroRT;
         this.fechaAlta = fechaAlta;
@@ -49,6 +48,36 @@ public class RecursoTecnologico {
     public CaracteristicaRecurso CaracteristicaRecurso { get => caracteristicaRecurso; set => caracteristicaRecurso = value; }
     public Mantenimiento Mantenimiento { get => mantenimiento; set => mantenimiento = value; }
     public HorarioRT HorarioRT { get => horarioRT; set => horarioRT = value; }
-    public CambioEstadoRT CambioEstadoRT { get => cambioEstadoRT; set => cambioEstadoRT = value; }
+    public List<CambioEstadoRT> CambioEstadoRT { get => cambioEstadoRT; set => cambioEstadoRT = value; }
     public Turno Turno { get => turno; set => turno = value; }
+
+
+    public Boolean estaDisponible()
+    {
+
+        foreach (CambioEstadoRT resp in this.cambioEstadoRT)
+        {
+            if (resp.esActual())
+            {
+                if (resp.esDisponible())
+                {
+                    return true;
+                }
+            }
+            
+        }
+        return false;
+    }
+
+    public DatosPantallaRT mostrarRT()
+    {
+        DatosPantallaRT datos = new DatosPantallaRT();
+        datos.TipoRecursoTecnologico = this.TipoRecursoTecnologico.mostrarTipoRecurso();
+        datos.NumeroRT = this.NumeroRT;
+        ModeloYMarca datos2 = new ModeloYMarca();
+        datos2 = this.Modelo.getModeloYmarca();
+        datos.Modelo = datos2.Modelo;
+        datos.Marca = datos2.Marca;
+        return datos;
+    }
 }

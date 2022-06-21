@@ -16,7 +16,8 @@ namespace DSI_PPAI_2022
         {
             InitializeComponent();
             GestorDeRegistroRTMantenimiento gestor = new GestorDeRegistroRTMantenimiento();
-            gestor.opcionRegistrarIngresoRTMantenimientoCorrectivo();
+            var data = gestor.opcionRegistrarIngresoRTMantenimientoCorrectivo();
+
             
         }
 
@@ -25,5 +26,9 @@ namespace DSI_PPAI_2022
 
         }
 
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

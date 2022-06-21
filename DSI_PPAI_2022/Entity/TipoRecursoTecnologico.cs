@@ -9,9 +9,9 @@ public class TipoRecursoTecnologico {
 
 	private string nombre;
 	private string descripción;
-    private Característica característica;
+    private Característica? característica;
 
-    public TipoRecursoTecnologico(string nombre, string descripción, Característica característica)
+    public TipoRecursoTecnologico(string nombre, string descripción, Característica? característica)
     {
         this.nombre = nombre;
         this.descripción = descripción;
@@ -20,5 +20,10 @@ public class TipoRecursoTecnologico {
 
     public string Nombre { get => nombre; set => nombre = value; }
     public string Descripción { get => descripción; set => descripción = value; }
-    public Característica Característica { get => característica; set => característica = value; }
+    public Característica? Característica { get => característica; set => característica = value; }
+
+    public string mostrarTipoRecurso()
+    {
+        return this.nombre;
+    }
 }
