@@ -28,34 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.recursoTecnologicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarMantenimientoCorrectivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // menuStrip1
             // 
-            this.button1.Location = new System.Drawing.Point(189, 124);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(440, 58);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Registrar RT en Mantenimeinto";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.recursoTecnologicoToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(376, 28);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // recursoTecnologicoToolStripMenuItem
+            // 
+            this.recursoTecnologicoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registrarMantenimientoCorrectivoToolStripMenuItem});
+            this.recursoTecnologicoToolStripMenuItem.Name = "recursoTecnologicoToolStripMenuItem";
+            this.recursoTecnologicoToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
+            this.recursoTecnologicoToolStripMenuItem.Text = "Recurso Tecnologico";
+            // 
+            // registrarMantenimientoCorrectivoToolStripMenuItem
+            // 
+            this.registrarMantenimientoCorrectivoToolStripMenuItem.Name = "registrarMantenimientoCorrectivoToolStripMenuItem";
+            this.registrarMantenimientoCorrectivoToolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.registrarMantenimientoCorrectivoToolStripMenuItem.Text = "Registrar Mantenimiento Correctivo";
+            this.registrarMantenimientoCorrectivoToolStripMenuItem.Click += new System.EventHandler(this.registrarMantenimientoCorrectivoToolStripMenuItem_Click);
             // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(376, 220);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Menu";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.Menu_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private Button button1;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem recursoTecnologicoToolStripMenuItem;
+        private ToolStripMenuItem registrarMantenimientoCorrectivoToolStripMenuItem;
     }
 }
