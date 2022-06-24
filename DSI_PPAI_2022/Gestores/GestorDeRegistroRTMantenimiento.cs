@@ -14,6 +14,7 @@ namespace DSI_PPAI_2022
 		private AsignacionResponsableTecnicoRT AsignacionRT;
 		private Sesion sesion;
 		private List<DatosPantallaRT> recursoTec;
+		private DateTime now;
 		/*********************************************************/
 		private int fechaFinPrevista;
 		private int sesionUsuarioLogueado;
@@ -33,15 +34,15 @@ namespace DSI_PPAI_2022
 
 			// Mock Estados
 			// Estados ambito RT
-			Estado estadoConIngresoEnMC = new Estado("Con ingreso en Mantenimiento correctivo.", "CI disulelto , dado de baja.", "RT",1,1);
-			Estado estadoIngresado = new Estado("Ingresado", "RT dado de alta con sus respectivos datos", "RT",1,1);
-			Estado estadoDisponible = new Estado("Disponible", "RT disponible para ser reservado", "RT",1,1);
-			Estado estadoEnMantenimiento = new Estado("En Mantenimiento", "RT en Mantenimiento", "RT",1,1);
+			Estado estadoConIngresoEnMC = new Estado("Con ingreso en Mantenimiento correctivo.", "CI disulelto , dado de baja.", "RT", 1, 1);
+			Estado estadoIngresado = new Estado("Ingresado", "RT dado de alta con sus respectivos datos", "RT", 1, 1);
+			Estado estadoDisponible = new Estado("Disponible", "RT disponible para ser reservado", "RT", 1, 1);
+			Estado estadoEnMantenimiento = new Estado("En Mantenimiento", "RT en Mantenimiento", "RT", 1, 1);
 
 			// Estados ambito Turno
-			Estado estadoConfirmado = new Estado("Confirmado", "Turno que se encuentra con fecha confirmada.", "Turno",1,1);
-			Estado estadoPendienteDeConfirmacion = new Estado("Pendiente de confirmacion", "Turno que se encuentra pendiente de confirmacion.", "Turno",1,1);
-			Estado estadoCanceladoMantenimientoCorrectivo = new Estado("Cancelado por mantenimiento correctivo", "Turno que se encuentra entre un periodo donde se lleva acabo un mantenimiento.", "Turno",1,1);
+			Estado estadoConfirmado = new Estado("Confirmado", "Turno que se encuentra con fecha confirmada.", "Turno", 1, 1);
+			Estado estadoPendienteDeConfirmacion = new Estado("Pendiente de confirmacion", "Turno que se encuentra pendiente de confirmacion.", "Turno", 1, 1);
+			Estado estadoCanceladoMantenimientoCorrectivo = new Estado("Cancelado por mantenimiento correctivo", "Turno que se encuentra entre un periodo donde se lleva acabo un mantenimiento.", "Turno", 1, 1);
 
 			// Mock Cambio Estado RT1
 			CambioEstadoRT cambioEstadoRT11 = new CambioEstadoRT(DateTime.Parse("2020-03-10"), DateTime.Parse("2020-11-10"), estadoIngresado);
@@ -133,7 +134,7 @@ namespace DSI_PPAI_2022
 
 			// Mock Tipo Recurso Tecnologicos
 
-			TipoRecursoTecnologico tipoRT1 = new TipoRecursoTecnologico("Notebook", "Recurso tecnologico notebook",null);
+			TipoRecursoTecnologico tipoRT1 = new TipoRecursoTecnologico("Notebook", "Recurso tecnologico notebook", null);
 			TipoRecursoTecnologico tipoRT2 = new TipoRecursoTecnologico("PC", "Recurso tecnologico pc de escritorio", null);
 
 			// Mock Recursos Tecnologicos
@@ -191,22 +192,50 @@ namespace DSI_PPAI_2022
 				if (resp.esDeUsuarioLogueadoYVigente(personal, resp))
 				{
 					return resp;
-                }
+				}
 			}
 			return null;
 		}
 
 		/* Busca los recursos tecnologicos vigentes del responsable tecnico y trae los datos necesarios para mostrar en pantalla */
 		public List<DatosPantallaRT> obtenerRTdisponible(AsignacionResponsableTecnicoRT RespTecRT)
-        {
-			List<DatosPantallaRT>  test = RespTecRT.getMisRT();
+		{
+			List<DatosPantallaRT> test = RespTecRT.getMisRT();
 			return test;
 		}
+		public void prueba(List<DatosPantallaRT> RT)
+        {
+			foreach(DatosPantallaRT resp in RT)
+            {
+				string[] info = new string[4];
+				info[0] = resp.NumeroRT.ToString();
 
+            }
+        }
 		public IEnumerable<IGrouping<string, DatosPantallaRT>> agruparRTTipoRecurso(List<DatosPantallaRT> RTPantalla)
 		{
 			return from rt in RTPantalla group rt by rt.TipoRecursoTecnologico;
 		}
 
+		public void tomarMotivo()
+		{
+			this.now = obtenerFechaHoraActual();
+			buscarTurnosCancelablesEnPeriodo();
+		}
+
+		public DateTime obtenerFechaHoraActual()
+        {
+			return DateTime.Now;
+        }
+
+		public void tomarSeleccionRT()
+        {
+
+        }
+
+		public void buscarTurnosCancelablesEnPeriodo()
+        {
+
+        }
 	}
 }
