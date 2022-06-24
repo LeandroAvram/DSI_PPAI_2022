@@ -17,16 +17,16 @@ namespace DSI_PPAI_2022
             InitializeComponent();;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void registrarMantenimientoCorrectivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
             PantallaRegistroRTMantenimiento pantalla = new PantallaRegistroRTMantenimiento();
             pantalla.Show();
-        }
-
-        private void Menu_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

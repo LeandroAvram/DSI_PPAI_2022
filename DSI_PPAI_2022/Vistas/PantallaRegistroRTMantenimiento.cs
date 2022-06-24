@@ -14,6 +14,7 @@ namespace DSI_PPAI_2022
     public partial class PantallaRegistroRTMantenimiento : Form
     {
         private GestorDeRegistroRTMantenimiento gestor;
+        private RecursoTecnologico RTseleccionado;
         public PantallaRegistroRTMantenimiento()
         {
             InitializeComponent();
@@ -39,5 +40,15 @@ namespace DSI_PPAI_2022
         {
 
         }
+
+        private void cmbTipoRT_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        /*
+        private void grillaRTDisponibles_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            datagridviewcell
+        }*/
     }
 }
