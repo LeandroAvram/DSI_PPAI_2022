@@ -18,9 +18,9 @@ public class RecursoTecnologico {
     private Mantenimiento mantenimiento;
     private HorarioRT horarioRT;
     private List<CambioEstadoRT> cambioEstadoRT;
-    private Turno turno;
+    private List<Turno> turno;
 
-    public RecursoTecnologico(int numeroRT, DateTime fechaAlta, string imagenes, int periodicidadMantenimientoPrev, int duracionMantenimientoPrev, int fraccionHorarioTurnos, Modelo modelo, TipoRecursoTecnologico tipoRecursoTecnologico, CaracteristicaRecurso caracteristicaRecurso, Mantenimiento mantenimiento, HorarioRT horarioRT, List<CambioEstadoRT> cambioEstadoRT, Turno turno)
+    public RecursoTecnologico(int numeroRT, DateTime fechaAlta, string imagenes, int periodicidadMantenimientoPrev, int duracionMantenimientoPrev, int fraccionHorarioTurnos, Modelo modelo, TipoRecursoTecnologico tipoRecursoTecnologico, CaracteristicaRecurso caracteristicaRecurso, Mantenimiento mantenimiento, HorarioRT horarioRT, List<CambioEstadoRT> cambioEstadoRT, List<Turno> turno)
     {
         this.numeroRT = numeroRT;
         this.fechaAlta = fechaAlta;
@@ -49,7 +49,7 @@ public class RecursoTecnologico {
     public Mantenimiento Mantenimiento { get => mantenimiento; set => mantenimiento = value; }
     public HorarioRT HorarioRT { get => horarioRT; set => horarioRT = value; }
     public List<CambioEstadoRT> CambioEstadoRT { get => cambioEstadoRT; set => cambioEstadoRT = value; }
-    public Turno Turno { get => turno; set => turno = value; }
+    public List<Turno> Turno { get => turno; set => turno = value; }
 
 
     public Boolean estaDisponible()
@@ -79,5 +79,57 @@ public class RecursoTecnologico {
         datos.Modelo = datos2.Modelo;
         datos.Marca = datos2.Marca;
         return datos;
+    }
+
+    public List<DatosPantallaTurnos> obtenerTurnosCancelablesEnPeriodo(DateTime fechaMantenimiento, List<AsignacionCientificoDelCI> asignaciones)
+    {
+        List<DatosPantallaTurnos> datos = new List<DatosPantallaTurnos>();
+
+        foreach(Turno turno in this.turno)
+        {
+            if (turno.esPlazoDeMantenimiento(fechaMantenimiento))
+            {
+                if (turno.estaReservadoOPendiente())
+                {
+                    datos.Add(turno.getTurnoCientifico(asignacionActaul(asignaciones)));
+                }
+            }
+        }
+        return datos;
+    }
+
+    public AsignacionCientificoDelCI asignacionActaul(List<AsignacionCientificoDelCI> asignaciones)
+    {
+        foreach (AsignacionCientificoDelCI asignacion in asignaciones)
+        {
+            if (asignacion.Turno == this.Turno)
+            {
+                return asignacion;
+            }
+        }
+        return null;
+    }
+
+    public void ingresarAmantenimientoCorrectivo(Estado enMantenimiento, DateTime fechafinM, string motivoMatenim)
+    {
+        CambioEstadoRT actual;
+        foreach(var ceRT in this.CambioEstadoRT)
+        {
+            if (ceRT.esActual())
+            {
+                ceRT.FechaHoraHasta = DateTime.Now;
+            }
+        }
+        this.CambioEstadoRT.Add(new CambioEstadoRT(DateTime.Now,null, enMantenimiento));
+        this.mantenimiento = new Mantenimiento(fechafinM,DateTime.Now,fechafinM,motivoMatenim,null);
+    }
+
+
+    public void cancelarTurnoConReserva(Estado enCancelado)
+    {
+       foreach(var tur in this.turno)
+        {
+            tur.cancelarTurno(enCancelado);
+        }
     }
 }

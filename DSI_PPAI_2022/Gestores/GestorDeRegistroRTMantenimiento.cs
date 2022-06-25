@@ -15,14 +15,21 @@ namespace DSI_PPAI_2022
 		private Sesion sesion;
 		private List<DatosPantallaRT> recursoTec;
 		private DateTime now;
+		private Estado cancelado;
+		private Estado mantenimiento;
+		private RecursoTecnologico rtSeleccionado;
+		private DateTime fechaFinPrevista;
+		private string motivo;
 		/*********************************************************/
-		private int fechaFinPrevista;
-		private int sesionUsuarioLogueado;
-		private int RTSeleccionado;
-		private int recursosTecnologicos;
-		private int motivoMantenimiento;
+
 
 		private List<AsignacionResponsableTecnicoRT> listaAsignaciones;
+		private List<AsignacionCientificoDelCI> listaAsignacionesCT;
+		private List<Estado> estadosGet;
+		private List<RecursoTecnologico> listaRT;
+		private List<DatosPantallaTurnos> datosTurnosXcientificos;
+
+
 
 		public GestorDeRegistroRTMantenimiento() {
 			/**********************************************************DATA MOCK************************************************************************/
@@ -43,6 +50,14 @@ namespace DSI_PPAI_2022
 			Estado estadoConfirmado = new Estado("Confirmado", "Turno que se encuentra con fecha confirmada.", "Turno", 1, 1);
 			Estado estadoPendienteDeConfirmacion = new Estado("Pendiente de confirmacion", "Turno que se encuentra pendiente de confirmacion.", "Turno", 1, 1);
 			Estado estadoCanceladoMantenimientoCorrectivo = new Estado("Cancelado por mantenimiento correctivo", "Turno que se encuentra entre un periodo donde se lleva acabo un mantenimiento.", "Turno", 1, 1);
+			estadosGet.Add(estadoConIngresoEnMC);
+			estadosGet.Add(estadoIngresado);
+			estadosGet.Add(estadoDisponible);
+			estadosGet.Add(estadoEnMantenimiento);
+			estadosGet.Add(estadoConfirmado);
+			estadosGet.Add(estadoPendienteDeConfirmacion);
+			estadosGet.Add(estadoCanceladoMantenimientoCorrectivo);
+
 
 			// Mock Cambio Estado RT1
 			CambioEstadoRT cambioEstadoRT11 = new CambioEstadoRT(DateTime.Parse("2020-03-10"), DateTime.Parse("2020-11-10"), estadoIngresado);
@@ -98,6 +113,59 @@ namespace DSI_PPAI_2022
 			listaCERT6.Add(cambioEstadoRT61);
 			listaCERT6.Add(cambioEstadoRT62);
 
+
+			//Cambio estado turno
+			CambioEstadoTurno cambioEstadoTurno = new CambioEstadoTurno(DateTime.Parse("2022-05-05 08:00"), null, estadoConfirmado);
+			CambioEstadoTurno cambioEstadoTurno2 = new CambioEstadoTurno(DateTime.Parse("2022-05-05 08:00"), null, estadoPendienteDeConfirmacion);
+			CambioEstadoTurno cambioEstadoTurno8 = new CambioEstadoTurno(DateTime.Parse("2022-05-05 08:00"), DateTime.Parse("2022-05-07 09:00"), estadoConfirmado);
+			CambioEstadoTurno cambioEstadoTurno9 = new CambioEstadoTurno(DateTime.Parse("2022-05-05 08:00"), DateTime.Parse("2022-05-07 09:00"), estadoConfirmado);
+			CambioEstadoTurno cambioEstadoTurno3 = new CambioEstadoTurno(DateTime.Parse("2022-05-05 08:00"), null, estadoConfirmado);
+			CambioEstadoTurno cambioEstadoTurno4 = new CambioEstadoTurno(DateTime.Parse("2022-05-05 08:00"), null, estadoPendienteDeConfirmacion);
+			CambioEstadoTurno cambioEstadoTurno5 = new CambioEstadoTurno(DateTime.Parse("2022-05-05 08:00"), null, estadoConfirmado);
+			CambioEstadoTurno cambioEstadoTurno6 = new CambioEstadoTurno(DateTime.Parse("2022-05-05 08:00"), null, estadoPendienteDeConfirmacion);
+			CambioEstadoTurno cambioEstadoTurno7 = new CambioEstadoTurno(DateTime.Parse("2022-05-05 08:00"), null, estadoPendienteDeConfirmacion);
+			CambioEstadoTurno cambioEstadoTurno11 = new CambioEstadoTurno(DateTime.Parse("2022-05-05 08:00"), DateTime.Parse("2022-05-07 09:00"), estadoCanceladoMantenimientoCorrectivo);
+			var listaCET1 = new List<CambioEstadoTurno>();
+			listaCET1.Add(cambioEstadoTurno8);
+			listaCET1.Add(cambioEstadoTurno);
+			var listaCET2 = new List<CambioEstadoTurno>();
+			listaCET2.Add(cambioEstadoTurno9);
+			listaCET2.Add(cambioEstadoTurno2);
+			var listaCET3 = new List<CambioEstadoTurno>();
+			listaCET3.Add(cambioEstadoTurno11);
+			listaCET3.Add(cambioEstadoTurno3);
+			var listaCET4 = new List<CambioEstadoTurno>();
+			listaCET4.Add(cambioEstadoTurno4);
+			var listaCET5 = new List<CambioEstadoTurno>();
+			listaCET5.Add(cambioEstadoTurno5);
+			var listaCET6 = new List<CambioEstadoTurno>();
+			listaCET6.Add(cambioEstadoTurno6);
+			var listaCET7 = new List<CambioEstadoTurno>();
+			listaCET7.Add(cambioEstadoTurno7);
+
+
+			//Turno Mock
+			Turno turno = new Turno(DateTime.Parse("2022-04-05"), "Lunes", DateTime.Parse("2022-05-15 10:30"), DateTime.Parse("2022-05-05 11:30"), listaCET1);
+			Turno turno2 = new Turno(DateTime.Parse("2022-03-10"), "Lunes", DateTime.Parse("2022-03-12 16:00"), DateTime.Parse("2022-03-12 17:00"), listaCET2);
+			Turno turno3 = new Turno(DateTime.Parse("2022-06-22"), "Lunes", DateTime.Parse("2022-07-15 08:00"), DateTime.Parse("2022-07-15 09:00"), listaCET3);
+			Turno turno4 = new Turno(DateTime.Parse("2022-06-21"), "Lunes", DateTime.Parse("2022-07-20 15:00"), DateTime.Parse("2022-07-20 16:00"), listaCET4);
+			Turno turno5 = new Turno(DateTime.Parse("2022-03-03"), "Lunes", DateTime.Parse("2022-05-15 10:30"), DateTime.Parse("2022-05-05 11:30"), listaCET5);
+			Turno turno6 = new Turno(DateTime.Parse("2022-04-05"), "Lunes", DateTime.Parse("2022-05-15 10:30"), DateTime.Parse("2022-05-05 11:30"), listaCET6);
+			Turno turno7 = new Turno(DateTime.Parse("2022-04-05"), "Lunes", DateTime.Parse("2022-05-15 10:30"), DateTime.Parse("2022-05-05 11:30"), listaCET7);
+			var listaTurno1 = new List<Turno>();
+			listaTurno1.Add(turno);
+			var listaTurno2 = new List<Turno>();
+			listaTurno2.Add(turno2);
+			var listaTurno3 = new List<Turno>();
+			listaTurno3.Add(turno3);
+			var listaTurno4 = new List<Turno>();
+			listaTurno4.Add(turno4);
+			var listaTurno5 = new List<Turno>();
+			listaTurno5.Add(turno5);
+			var listaTurno6 = new List<Turno>();
+			listaTurno6.Add(turno6);
+
+
 			// Mock Modelo y Marc
 			var listaModelo1 = new List<Modelo>();
 			Modelo modelo11 = new Modelo("AIO iMac MXWT2LE/A");
@@ -138,14 +206,14 @@ namespace DSI_PPAI_2022
 			TipoRecursoTecnologico tipoRT2 = new TipoRecursoTecnologico("PC", "Recurso tecnologico pc de escritorio", null);
 
 			// Mock Recursos Tecnologicos
-			RecursoTecnologico recursoTeconologico1 = new RecursoTecnologico(10, DateTime.Parse("2010-05-30"), "*", 30, 1, 30, modelo12, tipoRT2, null, null, null, listaCERT1, null);
-			RecursoTecnologico recursoTeconologico2 = new RecursoTecnologico(11, DateTime.Parse("2010-06-05"), "*", 30, 1, 30, modelo21, tipoRT1, null, null, null, listaCERT2, null);
-			RecursoTecnologico recursoTeconologico3 = new RecursoTecnologico(12, DateTime.Parse("2008-05-15"), "*", 30, 1, 30, modelo31, tipoRT1, null, null, null, listaCERT3, null);
-			RecursoTecnologico recursoTeconologico4 = new RecursoTecnologico(13, DateTime.Parse("2005-06-05"), "*", 30, 1, 30, modelo41, tipoRT2, null, null, null, listaCERT4, null);
-			RecursoTecnologico recursoTeconologico5 = new RecursoTecnologico(14, DateTime.Parse("2015-05-04"), "*", 30, 1, 30, modelo51, tipoRT2, null, null, null, listaCERT5, null);
-			RecursoTecnologico recursoTeconologico6 = new RecursoTecnologico(15, DateTime.Parse("2020-01-05"), "*", 30, 1, 30, modelo52, tipoRT2, null, null, null, listaCERT6, null);
-			var listaRT = new List<RecursoTecnologico>();
-			listaRT.Add(recursoTeconologico1);
+			RecursoTecnologico recursoTeconologico1 = new RecursoTecnologico(10, DateTime.Parse("2010-05-30"), "*", 30, 1, 30, modelo12, tipoRT2, null, null, null, listaCERT1, listaTurno1);
+			RecursoTecnologico recursoTeconologico2 = new RecursoTecnologico(11, DateTime.Parse("2010-06-05"), "*", 30, 1, 30, modelo21, tipoRT1, null, null, null, listaCERT2, listaTurno2);
+			RecursoTecnologico recursoTeconologico3 = new RecursoTecnologico(12, DateTime.Parse("2008-05-15"), "*", 30, 1, 30, modelo31, tipoRT1, null, null, null, listaCERT3, listaTurno3);
+			RecursoTecnologico recursoTeconologico4 = new RecursoTecnologico(13, DateTime.Parse("2005-06-05"), "*", 30, 1, 30, modelo41, tipoRT2, null, null, null, listaCERT4, listaTurno4);
+			RecursoTecnologico recursoTeconologico5 = new RecursoTecnologico(14, DateTime.Parse("2015-05-04"), "*", 30, 1, 30, modelo51, tipoRT2, null, null, null, listaCERT5, listaTurno5);
+			RecursoTecnologico recursoTeconologico6 = new RecursoTecnologico(15, DateTime.Parse("2020-01-05"), "*", 30, 1, 30, modelo52, tipoRT2, null, null, null, listaCERT6, listaTurno6);
+            var listaRT = new List<RecursoTecnologico>();
+            listaRT.Add(recursoTeconologico1);
 			listaRT.Add(recursoTeconologico2);
 			listaRT.Add(recursoTeconologico3);
 			listaRT.Add(recursoTeconologico4);
@@ -158,6 +226,14 @@ namespace DSI_PPAI_2022
 			listaAsignaciones.Add(new AsignacionResponsableTecnicoRT(DateTime.Parse("2009-05-05"), null, personalCientifico1, listaRT));
 			listaAsignaciones.Add(new AsignacionResponsableTecnicoRT(DateTime.Parse("2009-05-05"), DateTime.Parse("2009-05-05"), personalCientifico2, listaRT));
 			listaAsignaciones.Add(new AsignacionResponsableTecnicoRT(DateTime.Parse("2009-05-05"), null, personalCientifico3, listaRT));
+
+			// Mock AsignacionesResponsableTecnicoRT
+			listaAsignacionesCT = new List<AsignacionCientificoDelCI>();
+			listaAsignacionesCT.Add(new AsignacionCientificoDelCI(DateTime.Parse("2009-05-05"), DateTime.Parse("2009-05-05"), personalCientifico1, listaTurno1));
+			listaAsignacionesCT.Add(new AsignacionCientificoDelCI(DateTime.Parse("2009-05-05"), null, personalCientifico1, listaTurno2));
+			listaAsignacionesCT.Add(new AsignacionCientificoDelCI(DateTime.Parse("2009-05-05"), null, personalCientifico2, listaTurno3));
+			listaAsignacionesCT.Add(new AsignacionCientificoDelCI(DateTime.Parse("2009-05-05"), null, personalCientifico3, listaTurno4));
+
 
 			// Mock session
 			Usuario user = new Usuario("admin", "root", 0, personalCientifico1);
@@ -217,10 +293,11 @@ namespace DSI_PPAI_2022
 			return from rt in RTPantalla group rt by rt.TipoRecursoTecnologico;
 		}
 
-		public void tomarMotivo()
+		public void tomarMotivo(string motivo)
 		{
+			this.motivo = motivo;
 			this.now = obtenerFechaHoraActual();
-			buscarTurnosCancelablesEnPeriodo();
+			buscarTurnosCancelablesEnPeriodo(this.rtSeleccionado,this.fechaFinPrevista);
 		}
 
 		public DateTime obtenerFechaHoraActual()
@@ -228,14 +305,84 @@ namespace DSI_PPAI_2022
 			return DateTime.Now;
         }
 
-		public void tomarSeleccionRT()
+		public void tomarSeleccionRT(int numeroRtSelect)
         {
+			foreach (RecursoTecnologico rt in listaRT)
+            {
+				if(rt.NumeroRT== numeroRtSelect)
+                {
+					this.rtSeleccionado = rt;
+				}
+            }
+		}
 
+		public void tomarFechaFinPrevista(DateTime fecha)
+        {
+			this.fechaFinPrevista = fecha;
+
+		}
+
+		public IEnumerable<IGrouping<int, DatosPantallaTurnos>> buscarTurnosCancelablesEnPeriodo(RecursoTecnologico rt, DateTime fecha)
+        {
+			this.datosTurnosXcientificos = rt.obtenerTurnosCancelablesEnPeriodo(fecha,this.listaAsignacionesCT);
+			return ordenarTurnosXCientifico(datosTurnosXcientificos);
+		}
+
+		public IEnumerable<IGrouping<int, DatosPantallaTurnos>> ordenarTurnosXCientifico(List<DatosPantallaTurnos> CTPantalla)
+		{
+			return from tur in CTPantalla group tur by tur.PersonalCientifico.Legajo;
+		}
+
+		public void tomarNotificacionIngresada()
+        {
+			obtenerEstados(this.estadosGet);
+			generarMantenimiento();
+		}
+
+		
+
+		public void obtenerEstados(List<Estado> estados)
+        {
+			foreach (Estado estado in estados)
+            {
+                if (estado.esAmbitoTurno())
+                {
+					if (estado.esCancelado())
+                    {
+						this.cancelado = estado;
+					}
+				}
+				if (estado.esAmbitoTurno())
+				{
+					if (estado.esCancelado())
+					{
+						this.mantenimiento = estado;
+					}
+				}
+
+			}
         }
 
-		public void buscarTurnosCancelablesEnPeriodo()
+		public Boolean generarMantenimiento()
         {
+			this.rtSeleccionado.ingresarAmantenimientoCorrectivo(this.mantenimiento, this.fechaFinPrevista,this.motivo);
+			this.rtSeleccionado.cancelarTurnoConReserva(this.cancelado);
+			var email = generarMail();
+            foreach (var cintf in this.datosTurnosXcientificos)
+            {
+				enviarEmail(cintf.PersonalCientifico.CorreoElectronicoPersonal);
+			}
+			return true;
+		}
 
+		public string generarMail()
+        {
+			return "mail";
         }
+
+		public Boolean enviarEmail(string correo)
+		{
+			return true;
+		}
 	}
 }

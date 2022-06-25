@@ -36,4 +36,31 @@ public class Estado {
         }
         return false;
     }
+
+    public Boolean esReservadoOPendiente()
+    {
+        if (this.Nombre == "Confirmado" || this.Nombre == "Pendiente de confirmacion")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean esAmbitoTurno()
+    {
+        if (this.Ambito == "Turno")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean esCancelado()
+    {
+        if (this.Nombre == "Cancelado por mantenimiento correctivo")
+        {
+            return true;
+        }
+        return false;
+    }
 }
