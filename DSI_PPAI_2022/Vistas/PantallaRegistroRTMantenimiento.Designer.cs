@@ -34,7 +34,6 @@
             this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mascaraFecha = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtBoxMotivo = new System.Windows.Forms.TextBox();
@@ -48,8 +47,10 @@
             this.botonCancelar = new System.Windows.Forms.Button();
             this.botonConfirmar = new System.Windows.Forms.Button();
             this.grupoNotificacion = new System.Windows.Forms.GroupBox();
-            this.checkBoxMail = new System.Windows.Forms.CheckBox();
             this.checkBoxWhatsapp = new System.Windows.Forms.CheckBox();
+            this.checkBoxMail = new System.Windows.Forms.CheckBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.btnMotivo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaRTDisponibles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaTurnos)).BeginInit();
             this.grupoNotificacion.SuspendLayout();
@@ -90,7 +91,7 @@
             this.grillaRTDisponibles.RowTemplate.Height = 29;
             this.grillaRTDisponibles.Size = new System.Drawing.Size(664, 238);
             this.grillaRTDisponibles.TabIndex = 3;
-            //this.grillaRTDisponibles.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grillaRTDisponibles_RowHeaderMouseDoubleClick);
+            this.grillaRTDisponibles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaRTDisponibles_CellClick);
             // 
             // numero
             // 
@@ -115,16 +116,6 @@
             this.modelo.Name = "modelo";
             this.modelo.ReadOnly = true;
             this.modelo.Width = 250;
-            // 
-            // mascaraFecha
-            // 
-            this.mascaraFecha.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.mascaraFecha.Location = new System.Drawing.Point(790, 94);
-            this.mascaraFecha.Mask = "00/00/0000";
-            this.mascaraFecha.Name = "mascaraFecha";
-            this.mascaraFecha.Size = new System.Drawing.Size(125, 43);
-            this.mascaraFecha.TabIndex = 4;
-            this.mascaraFecha.ValidatingType = typeof(System.DateTime);
             // 
             // label2
             // 
@@ -173,7 +164,7 @@
             this.fecha,
             this.horaInicio,
             this.horaFin});
-            this.grillaTurnos.Location = new System.Drawing.Point(12, 367);
+            this.grillaTurnos.Location = new System.Drawing.Point(12, 368);
             this.grillaTurnos.Name = "grillaTurnos";
             this.grillaTurnos.ReadOnly = true;
             this.grillaTurnos.RowHeadersWidth = 51;
@@ -253,6 +244,16 @@
             this.grupoNotificacion.TabStop = false;
             this.grupoNotificacion.Text = "Seleccione medio de notificacion";
             // 
+            // checkBoxWhatsapp
+            // 
+            this.checkBoxWhatsapp.AutoSize = true;
+            this.checkBoxWhatsapp.Location = new System.Drawing.Point(6, 56);
+            this.checkBoxWhatsapp.Name = "checkBoxWhatsapp";
+            this.checkBoxWhatsapp.Size = new System.Drawing.Size(102, 24);
+            this.checkBoxWhatsapp.TabIndex = 1;
+            this.checkBoxWhatsapp.Text = "Whatsapp";
+            this.checkBoxWhatsapp.UseVisualStyleBackColor = true;
+            // 
             // checkBoxMail
             // 
             this.checkBoxMail.AutoSize = true;
@@ -265,21 +266,33 @@
             this.checkBoxMail.Text = "Mail";
             this.checkBoxMail.UseVisualStyleBackColor = true;
             // 
-            // checkBoxWhatsapp
+            // dateTimePicker1
             // 
-            this.checkBoxWhatsapp.AutoSize = true;
-            this.checkBoxWhatsapp.Location = new System.Drawing.Point(6, 56);
-            this.checkBoxWhatsapp.Name = "checkBoxWhatsapp";
-            this.checkBoxWhatsapp.Size = new System.Drawing.Size(102, 24);
-            this.checkBoxWhatsapp.TabIndex = 1;
-            this.checkBoxWhatsapp.Text = "Whatsapp";
-            this.checkBoxWhatsapp.UseVisualStyleBackColor = true;
+            this.dateTimePicker1.Location = new System.Drawing.Point(710, 95);
+            this.dateTimePicker1.MinDate = new System.DateTime(2022, 6, 25, 16, 0, 53, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(250, 27);
+            this.dateTimePicker1.TabIndex = 15;
+            this.dateTimePicker1.Value = new System.DateTime(2022, 6, 25, 16, 0, 53, 0);
+            this.dateTimePicker1.CloseUp += new System.EventHandler(this.dateTimePicker1_CloseUp);
+            // 
+            // btnMotivo
+            // 
+            this.btnMotivo.Location = new System.Drawing.Point(852, 303);
+            this.btnMotivo.Name = "btnMotivo";
+            this.btnMotivo.Size = new System.Drawing.Size(108, 38);
+            this.btnMotivo.TabIndex = 16;
+            this.btnMotivo.Text = "Enviar Motivo";
+            this.btnMotivo.UseVisualStyleBackColor = true;
+            this.btnMotivo.Click += new System.EventHandler(this.btnMotivo_Click);
             // 
             // PantallaRegistroRTMantenimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1014, 654);
+            this.Controls.Add(this.btnMotivo);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.grupoNotificacion);
             this.Controls.Add(this.botonConfirmar);
             this.Controls.Add(this.botonCancelar);
@@ -290,7 +303,6 @@
             this.Controls.Add(this.txtBoxMotivo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.mascaraFecha);
             this.Controls.Add(this.grillaRTDisponibles);
             this.Controls.Add(this.cmbTipoRT);
             this.Controls.Add(this.label1);
@@ -314,7 +326,6 @@
         private DataGridViewTextBoxColumn numero;
         private DataGridViewTextBoxColumn marca;
         private DataGridViewTextBoxColumn modelo;
-        private MaskedTextBox mascaraFecha;
         private Label label2;
         private Label label3;
         private TextBox txtBoxMotivo;
@@ -330,5 +341,7 @@
         private GroupBox grupoNotificacion;
         private CheckBox checkBoxWhatsapp;
         private CheckBox checkBoxMail;
+        private DateTimePicker dateTimePicker1;
+        private Button btnMotivo;
     }
 }
