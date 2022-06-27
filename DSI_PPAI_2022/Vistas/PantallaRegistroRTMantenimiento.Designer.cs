@@ -51,6 +51,7 @@
             this.checkBoxMail = new System.Windows.Forms.CheckBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnMotivo = new System.Windows.Forms.Button();
+            this.verTurnos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaRTDisponibles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaTurnos)).BeginInit();
             this.grupoNotificacion.SuspendLayout();
@@ -60,18 +61,20 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 28);
+            this.label1.Location = new System.Drawing.Point(26, 57);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(234, 20);
+            this.label1.Size = new System.Drawing.Size(471, 41);
             this.label1.TabIndex = 1;
             this.label1.Text = "Seleccionar Recurso Tecnologico";
             // 
             // cmbTipoRT
             // 
             this.cmbTipoRT.FormattingEnabled = true;
-            this.cmbTipoRT.Location = new System.Drawing.Point(525, 25);
+            this.cmbTipoRT.Location = new System.Drawing.Point(1116, 51);
+            this.cmbTipoRT.Margin = new System.Windows.Forms.Padding(6);
             this.cmbTipoRT.Name = "cmbTipoRT";
-            this.cmbTipoRT.Size = new System.Drawing.Size(151, 28);
+            this.cmbTipoRT.Size = new System.Drawing.Size(316, 49);
             this.cmbTipoRT.TabIndex = 2;
             this.cmbTipoRT.SelectedIndexChanged += new System.EventHandler(this.cmbTipoRT_SelectedIndexChanged);
             // 
@@ -84,14 +87,16 @@
             this.numero,
             this.marca,
             this.modelo});
-            this.grillaRTDisponibles.Location = new System.Drawing.Point(12, 59);
+            this.grillaRTDisponibles.Location = new System.Drawing.Point(26, 121);
+            this.grillaRTDisponibles.Margin = new System.Windows.Forms.Padding(6);
             this.grillaRTDisponibles.Name = "grillaRTDisponibles";
             this.grillaRTDisponibles.ReadOnly = true;
             this.grillaRTDisponibles.RowHeadersWidth = 51;
             this.grillaRTDisponibles.RowTemplate.Height = 29;
-            this.grillaRTDisponibles.Size = new System.Drawing.Size(664, 238);
+            this.grillaRTDisponibles.Size = new System.Drawing.Size(1411, 488);
             this.grillaRTDisponibles.TabIndex = 3;
             this.grillaRTDisponibles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaRTDisponibles_CellClick);
+            this.grillaRTDisponibles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaRTDisponibles_CellContentClick);
             // 
             // numero
             // 
@@ -121,9 +126,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(688, 59);
+            this.label2.Location = new System.Drawing.Point(1462, 121);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(307, 19);
+            this.label2.Size = new System.Drawing.Size(592, 37);
             this.label2.TabIndex = 5;
             this.label2.Text = "Ingrese fecha fin prevista del mantenimiento";
             // 
@@ -131,27 +137,30 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(724, 151);
+            this.label3.Location = new System.Drawing.Point(1538, 310);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(236, 19);
+            this.label3.Size = new System.Drawing.Size(456, 37);
             this.label3.TabIndex = 6;
             this.label3.Text = "Ingrese motivo de mantenimiento";
             // 
             // txtBoxMotivo
             // 
-            this.txtBoxMotivo.Location = new System.Drawing.Point(724, 173);
+            this.txtBoxMotivo.Location = new System.Drawing.Point(1538, 355);
+            this.txtBoxMotivo.Margin = new System.Windows.Forms.Padding(6);
             this.txtBoxMotivo.Multiline = true;
             this.txtBoxMotivo.Name = "txtBoxMotivo";
-            this.txtBoxMotivo.Size = new System.Drawing.Size(236, 124);
+            this.txtBoxMotivo.Size = new System.Drawing.Size(497, 250);
             this.txtBoxMotivo.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(12, 334);
+            this.label4.Location = new System.Drawing.Point(26, 685);
+            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(312, 20);
+            this.label4.Size = new System.Drawing.Size(626, 41);
             this.label4.TabIndex = 8;
             this.label4.Text = "Turnos registrados del Recurso Tecnologico";
             // 
@@ -164,12 +173,13 @@
             this.fecha,
             this.horaInicio,
             this.horaFin});
-            this.grillaTurnos.Location = new System.Drawing.Point(12, 368);
+            this.grillaTurnos.Location = new System.Drawing.Point(26, 754);
+            this.grillaTurnos.Margin = new System.Windows.Forms.Padding(6);
             this.grillaTurnos.Name = "grillaTurnos";
             this.grillaTurnos.ReadOnly = true;
             this.grillaTurnos.RowHeadersWidth = 51;
             this.grillaTurnos.RowTemplate.Height = 29;
-            this.grillaTurnos.Size = new System.Drawing.Size(532, 193);
+            this.grillaTurnos.Size = new System.Drawing.Size(1130, 396);
             this.grillaTurnos.TabIndex = 9;
             // 
             // fecha
@@ -199,35 +209,39 @@
             // cmbCientifico
             // 
             this.cmbCientifico.FormattingEnabled = true;
-            this.cmbCientifico.Location = new System.Drawing.Point(393, 334);
+            this.cmbCientifico.Location = new System.Drawing.Point(835, 685);
+            this.cmbCientifico.Margin = new System.Windows.Forms.Padding(6);
             this.cmbCientifico.Name = "cmbCientifico";
-            this.cmbCientifico.Size = new System.Drawing.Size(151, 28);
+            this.cmbCientifico.Size = new System.Drawing.Size(316, 49);
             this.cmbCientifico.TabIndex = 10;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(599, 367);
+            this.label5.Location = new System.Drawing.Point(1273, 752);
+            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(347, 20);
+            this.label5.Size = new System.Drawing.Size(697, 41);
             this.label5.TabIndex = 11;
             this.label5.Text = "Confirmar mantenimiento correctivo del recurso";
             // 
             // botonCancelar
             // 
-            this.botonCancelar.Location = new System.Drawing.Point(668, 400);
+            this.botonCancelar.Location = new System.Drawing.Point(1420, 820);
+            this.botonCancelar.Margin = new System.Windows.Forms.Padding(6);
             this.botonCancelar.Name = "botonCancelar";
-            this.botonCancelar.Size = new System.Drawing.Size(94, 29);
+            this.botonCancelar.Size = new System.Drawing.Size(200, 59);
             this.botonCancelar.TabIndex = 12;
             this.botonCancelar.Text = "Cancelar";
             this.botonCancelar.UseVisualStyleBackColor = true;
             // 
             // botonConfirmar
             // 
-            this.botonConfirmar.Location = new System.Drawing.Point(790, 400);
+            this.botonConfirmar.Location = new System.Drawing.Point(1679, 820);
+            this.botonConfirmar.Margin = new System.Windows.Forms.Padding(6);
             this.botonConfirmar.Name = "botonConfirmar";
-            this.botonConfirmar.Size = new System.Drawing.Size(94, 29);
+            this.botonConfirmar.Size = new System.Drawing.Size(200, 59);
             this.botonConfirmar.TabIndex = 13;
             this.botonConfirmar.Text = "Confirmar";
             this.botonConfirmar.UseVisualStyleBackColor = true;
@@ -237,9 +251,11 @@
             this.grupoNotificacion.Controls.Add(this.checkBoxWhatsapp);
             this.grupoNotificacion.Controls.Add(this.checkBoxMail);
             this.grupoNotificacion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.grupoNotificacion.Location = new System.Drawing.Point(636, 474);
+            this.grupoNotificacion.Location = new System.Drawing.Point(1352, 972);
+            this.grupoNotificacion.Margin = new System.Windows.Forms.Padding(6);
             this.grupoNotificacion.Name = "grupoNotificacion";
-            this.grupoNotificacion.Size = new System.Drawing.Size(288, 93);
+            this.grupoNotificacion.Padding = new System.Windows.Forms.Padding(6);
+            this.grupoNotificacion.Size = new System.Drawing.Size(612, 191);
             this.grupoNotificacion.TabIndex = 14;
             this.grupoNotificacion.TabStop = false;
             this.grupoNotificacion.Text = "Seleccione medio de notificacion";
@@ -247,9 +263,10 @@
             // checkBoxWhatsapp
             // 
             this.checkBoxWhatsapp.AutoSize = true;
-            this.checkBoxWhatsapp.Location = new System.Drawing.Point(6, 56);
+            this.checkBoxWhatsapp.Location = new System.Drawing.Point(13, 115);
+            this.checkBoxWhatsapp.Margin = new System.Windows.Forms.Padding(6);
             this.checkBoxWhatsapp.Name = "checkBoxWhatsapp";
-            this.checkBoxWhatsapp.Size = new System.Drawing.Size(102, 24);
+            this.checkBoxWhatsapp.Size = new System.Drawing.Size(199, 45);
             this.checkBoxWhatsapp.TabIndex = 1;
             this.checkBoxWhatsapp.Text = "Whatsapp";
             this.checkBoxWhatsapp.UseVisualStyleBackColor = true;
@@ -259,38 +276,52 @@
             this.checkBoxMail.AutoSize = true;
             this.checkBoxMail.Checked = true;
             this.checkBoxMail.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxMail.Location = new System.Drawing.Point(6, 26);
+            this.checkBoxMail.Location = new System.Drawing.Point(13, 53);
+            this.checkBoxMail.Margin = new System.Windows.Forms.Padding(6);
             this.checkBoxMail.Name = "checkBoxMail";
-            this.checkBoxMail.Size = new System.Drawing.Size(61, 24);
+            this.checkBoxMail.Size = new System.Drawing.Size(119, 45);
             this.checkBoxMail.TabIndex = 0;
             this.checkBoxMail.Text = "Mail";
             this.checkBoxMail.UseVisualStyleBackColor = true;
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(710, 95);
+            this.dateTimePicker1.Location = new System.Drawing.Point(1509, 195);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(6);
             this.dateTimePicker1.MinDate = new System.DateTime(2022, 6, 25, 16, 0, 53, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(250, 27);
+            this.dateTimePicker1.Size = new System.Drawing.Size(527, 47);
             this.dateTimePicker1.TabIndex = 15;
             this.dateTimePicker1.Value = new System.DateTime(2022, 6, 25, 16, 0, 53, 0);
             this.dateTimePicker1.CloseUp += new System.EventHandler(this.dateTimePicker1_CloseUp);
             // 
             // btnMotivo
             // 
-            this.btnMotivo.Location = new System.Drawing.Point(852, 303);
+            this.btnMotivo.Location = new System.Drawing.Point(1810, 621);
+            this.btnMotivo.Margin = new System.Windows.Forms.Padding(6);
             this.btnMotivo.Name = "btnMotivo";
-            this.btnMotivo.Size = new System.Drawing.Size(108, 38);
+            this.btnMotivo.Size = new System.Drawing.Size(230, 78);
             this.btnMotivo.TabIndex = 16;
             this.btnMotivo.Text = "Enviar Motivo";
             this.btnMotivo.UseVisualStyleBackColor = true;
             this.btnMotivo.Click += new System.EventHandler(this.btnMotivo_Click);
             // 
+            // verTurnos
+            // 
+            this.verTurnos.Location = new System.Drawing.Point(1723, 1226);
+            this.verTurnos.Name = "verTurnos";
+            this.verTurnos.Size = new System.Drawing.Size(371, 58);
+            this.verTurnos.TabIndex = 17;
+            this.verTurnos.Text = "button1";
+            this.verTurnos.UseVisualStyleBackColor = true;
+            this.verTurnos.Click += new System.EventHandler(this.verTurnos_Click);
+            // 
             // PantallaRegistroRTMantenimiento
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1014, 654);
+            this.ClientSize = new System.Drawing.Size(2155, 1341);
+            this.Controls.Add(this.verTurnos);
             this.Controls.Add(this.btnMotivo);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.grupoNotificacion);
@@ -306,7 +337,7 @@
             this.Controls.Add(this.grillaRTDisponibles);
             this.Controls.Add(this.cmbTipoRT);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PantallaRegistroRTMantenimiento";
             this.Text = "Registrar Ingreso de Recurso Tecnologico en Mantenimiento Correctivo";
             this.Load += new System.EventHandler(this.PantallaRegistroRTMantenimiento_Load);
@@ -343,5 +374,6 @@
         private CheckBox checkBoxMail;
         private DateTimePicker dateTimePicker1;
         private Button btnMotivo;
+        private Button verTurnos;
     }
 }

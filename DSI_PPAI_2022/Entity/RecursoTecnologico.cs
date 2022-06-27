@@ -52,9 +52,9 @@ public class RecursoTecnologico {
     public List<Turno> Turno { get => turno; set => turno = value; }
 
 
+    /* Valida que el ultimo cambio de estado apunte a estado disponible */
     public Boolean estaDisponible()
     {
-
         foreach (CambioEstadoRT resp in this.cambioEstadoRT)
         {
             if (resp.esActual())
@@ -69,11 +69,13 @@ public class RecursoTecnologico {
         return false;
     }
 
+
+    /* Busca, Obtiene y arma los datos necesarios para devolver al gestor */
     public DatosPantallaRT mostrarRT()
     {
         DatosPantallaRT datos = new DatosPantallaRT();
         datos.TipoRecursoTecnologico = this.TipoRecursoTecnologico.mostrarTipoRecurso();
-        datos.NumeroRT = this.NumeroRT;
+        datos.NumeroRT = getNumeroRT();
         ModeloYMarca datos2 = new ModeloYMarca();
         datos2 = this.Modelo.getModeloYmarca();
         datos.Modelo = datos2.Modelo;
@@ -81,17 +83,35 @@ public class RecursoTecnologico {
         return datos;
     }
 
+    /* Obtiene el numero del RT */
+    public int getNumeroRT()
+    {
+        return this.NumeroRT;
+    }
+
+
     public List<DatosPantallaTurnos> obtenerTurnosCancelablesEnPeriodo(DateTime fechaMantenimiento, List<AsignacionCientificoDelCI> asignaciones)
     {
         List<DatosPantallaTurnos> datos = new List<DatosPantallaTurnos>();
-
-        foreach(Turno turno in this.turno)
+        AsignacionCientificoDelCI asignacionDelTurno = null;
+        foreach (Turno turno in this.turno)
         {
             if (turno.esPlazoDeMantenimiento(fechaMantenimiento))
             {
                 if (turno.estaReservadoOPendiente())
                 {
-                    datos.Add(turno.getTurnoCientifico(asignacionActaul(asignaciones)));
+                    foreach (AsignacionCientificoDelCI asignacion in asignaciones)
+                    {
+                        foreach (var turnosASig in asignacion.Turno)
+                        {
+                                if (turno == turnosASig)
+                                {
+                                  asignacionDelTurno = asignacion;
+                                }
+                        }
+
+                    }
+                    datos.Add(turno.getTurnoCientifico(asignacionDelTurno));
                 }
             }
         }
@@ -102,10 +122,17 @@ public class RecursoTecnologico {
     {
         foreach (AsignacionCientificoDelCI asignacion in asignaciones)
         {
-            if (asignacion.Turno == this.Turno)
+            foreach(var turnosASig in asignacion.Turno)
             {
-                return asignacion;
+                foreach(var turnos in this.Turno)
+                {
+                    if (turnos == turnosASig)
+                    {
+                        return asignacion;
+                    }
+                }   
             }
+            
         }
         return null;
     }

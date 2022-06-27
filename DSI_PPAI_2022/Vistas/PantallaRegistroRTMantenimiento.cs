@@ -1,4 +1,5 @@
 ﻿using DSI_PPAI_2022.Resource;
+using DSI_PPAI_2022.Vistas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -186,6 +187,17 @@ namespace DSI_PPAI_2022
 
                 }
             }
+        }
+
+        private void verTurnos_Click(object sender, EventArgs e)
+        {
+            TurnosPorRT pantallaTurnosXRt = new TurnosPorRT(this.gestor);
+            pantallaTurnosXRt.Show();
+        }
+
+        private void grillaRTDisponibles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

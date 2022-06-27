@@ -28,6 +28,8 @@ public class Estado {
     public int EsReservable { get => esReservable; set => esReservable = value; }
     public int EsCancelable { get => esCancelable; set => esCancelable = value; }
 
+
+    /* Pregunta si el estado es disponible */
     public Boolean esDisponible()
     {
         if(this.Nombre == "Disponible")

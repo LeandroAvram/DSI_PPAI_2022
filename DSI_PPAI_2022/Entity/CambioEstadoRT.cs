@@ -21,6 +21,7 @@ public class CambioEstadoRT {
     public DateTime? FechaHoraHasta { get => fechaHoraHasta; set => fechaHoraHasta = value; }
     public Estado Estado { get => estado; set => estado = value; }
 
+    /* Pregunta si el cambio de estado RT es el actual  */
     public Boolean esActual()
     {
         if (this.fechaHoraHasta == null)
@@ -30,6 +31,7 @@ public class CambioEstadoRT {
         return false;
     }
 
+    /* Pregunta si el estado actual del RT es disponible */
     public Boolean esDisponible()
     {
         if(this.Estado.esDisponible())

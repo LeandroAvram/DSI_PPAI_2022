@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DSI_PPAI_2022.Vistas;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,5 +29,6 @@ namespace DSI_PPAI_2022
             PantallaRegistroRTMantenimiento pantalla = new PantallaRegistroRTMantenimiento();
             pantalla.Show();
         }
+
     }
 }

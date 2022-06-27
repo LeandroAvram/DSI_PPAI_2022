@@ -15,16 +15,18 @@ public class Modelo {
 
     public string Nombre { get => nombre; set => nombre = value; }
 
+
+    /* Retorna los atributos modelo y marca del RT en cuestion*/
     public ModeloYMarca getModeloYmarca()
     {
-
 		ModeloYMarca dato = new ModeloYMarca();
-        dato.Modelo = getNombre();
         Marca dato2 = new Marca();
+        dato.Modelo = getNombre();
         dato.Marca = dato2.getMarca(getNombre());
         return dato;
     }
 
+    /* Retorna solo el nombre del Modelo del RT en cuestion */
     public string getNombre()
     {
         return this.nombre;

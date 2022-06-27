@@ -24,26 +24,38 @@ public class AsignacionResponsableTecnicoRT {
     public PersonalCientífico PersonalCientífico { get => personalCientífico; set => personalCientífico = value; }
     public List<RecursoTecnologico> RecursoTecnologico { get => recursoTecnologico; set => recursoTecnologico = value; }
 
+    /* Retorna true si esa asignacion es de ese usuario y esta vigente */
     public Boolean esDeUsuarioLogueadoYVigente(PersonalCientífico personal, AsignacionResponsableTecnicoRT RespTecRT)
     {
-        if (RespTecRT.personalCientífico == personal&& RespTecRT.fechaHasta == null)
+        if (RespTecRT.personalCientífico == personal && esVigente(RespTecRT))
         {
             return true;
         }
         return false;
     }
 
+    /*Valida que dicha asignacion enviada por parametro este vigente*/
+    public Boolean esVigente(AsignacionResponsableTecnicoRT RespTecRT)
+    {
+        if(RespTecRT.fechaHasta == null)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /* Busca todos los RT de dicha asignacion, que estan disponibles y que el cambio de estado sea el actual retornando los datos necesarios para motrar en pantalla  */
     public List<DatosPantallaRT> getMisRT()
     {
-        List<DatosPantallaRT> lista3 = new List<DatosPantallaRT>();
+        List<DatosPantallaRT> lista = new List<DatosPantallaRT>();
         foreach (RecursoTecnologico RT in this.RecursoTecnologico)
         {
             if (RT.estaDisponible())
             {
-                lista3.Add(RT.mostrarRT());
+                lista.Add(RT.mostrarRT());
             }
         }
 
-        return lista3;
+        return lista;
     }
 }

@@ -22,6 +22,7 @@ public class TipoRecursoTecnologico {
     public string Descripción { get => descripción; set => descripción = value; }
     public Característica? Característica { get => característica; set => característica = value; }
 
+    /* Retorna el nombre del tipo de recurso */
     public string mostrarTipoRecurso()
     {
         return this.nombre;

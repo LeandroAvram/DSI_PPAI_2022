@@ -18,30 +18,10 @@ public class Usuario
 	public string NameUsuario { get => nameUsuario; set => nameUsuario = value; }
 	public int Habilitado { get => habilitado; set => habilitado = value; }
 	public PersonalCientífico PersonalCientifico { get => personalCientifico; set => personalCientifico = value; }
-	public void crear()
-	{
 
-	}
-
-	public void habilitar()
-	{
-
-	}
-
-	public void inhabilitar()
-	{
-
-	}
-
-	public void modificarPassword()
-	{
-
-	}
-
+	/* Retorna el personal cientifico del usuario logeado en la session */
 	public PersonalCientífico getCientifico()
 	{
-
 		return this.PersonalCientifico;
-
 	}
 }

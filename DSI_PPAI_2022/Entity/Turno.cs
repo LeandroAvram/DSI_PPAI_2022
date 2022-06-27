@@ -31,7 +31,7 @@ public class Turno {
     {
         var result = DateTime.Compare(DateTime.Now, this.fechaHoraInicio);
         var result2 = DateTime.Compare(fechaFin, this.fechaHoraFin);
-        if (result>=0&& result2<=0)
+        if (result<=0&& result2>=0)
         {
             return true;
         }

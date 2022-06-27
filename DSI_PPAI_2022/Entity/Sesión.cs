@@ -25,6 +25,7 @@
         public TimeSpan HoraInicio { get => horaInicio; set => horaInicio = value; }
         public Usuario Usuario { get => usuario; set => usuario = value; }
 
+        /* Busca del usuario el personal cientifico asociado */
         public PersonalCientífico GetPersonalCientificoEnSesion()
         {
             return Usuario.getCientifico();
